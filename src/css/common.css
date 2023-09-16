@@ -14,32 +14,27 @@ body {
 
 img {
   display: block;
-  max-width: 100%;
+  max-width: 50%;
+  border-radius: 30px;
 }
 
-
-/* 2 task */
-
-.timer {
-  padding-top: 25px;
-  position: relative;
-  font-family: monaco, consolas, "courier new", monospace;
-  font-size: 1.5rem;
-  line-height: 1.2;
-}
-
-.timer div {
-  position: relative;
+.loader {
+  width: 24px;
+  height: 24px;
+  border: 2px solid grey;
+  border-bottom-color: transparent;
+  border-radius: 50%;
   display: inline-block;
-  padding: 0 .25em;
-  margin: 0 .06125em;
-  z-index: 1;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
 }
 
-.timer .value {
-  color: #eee;
-  text-shadow: 0 1px 0 #fff;
-  background: #333;
-  border-radius: .125em;
-  outline: 1px solid transparent
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }

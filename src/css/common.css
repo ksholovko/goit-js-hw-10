@@ -14,11 +14,13 @@ body {
 
 h1 {
   margin: 0;
-  padding-bottom: 5px;
+  padding-top: 5px;
 }
 
 p {
   margin: 0;
+  padding-top: 5px;
+  width: 50vw;
 }
 
 p span {
@@ -27,8 +29,8 @@ p span {
 }
 
 img {
+  animation: 1s ease-out 0s 1 slideInLeft;
   padding-top: 15px;
-  padding-bottom: 5px;
   display: block;
   max-width: 50%;
   border-radius: 30px;
@@ -36,4 +38,14 @@ img {
 
 .breed-select {
   display: none;
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }

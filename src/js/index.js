@@ -55,25 +55,26 @@ function showBreedInfo() {
     'Oops!',
     'Something went wrong! Try reloading the page!',
     'Okay',
-  );
-console.log(error);})
-
+    );
+    console.log(error);})
 }
 
 function createBreedMarkup(response) {
       
-      Loading.remove();
-      const selectedBreed = response.data[0];
-      const catImage = response.data[0].url
-      const catName = selectedBreed.breeds[0].name;
-      const catTemperament = selectedBreed.breeds[0].temperament;
+  Loading.remove();
+  const selectedBreed = response.data[0];
+  const catImage = response.data[0].url;
+  const catName = selectedBreed.breeds[0].name;
+  const catDescription = selectedBreed.breeds[0].description;
+  const catTemperament = selectedBreed.breeds[0].temperament;
+
       const catCard = `<img src="${catImage}" alt="${catName}"s>
       <h1>${catName}</h1>
+      <p>${catDescription}</p>
       <p> <span>Temperament:</span> ${catTemperament}</p>`;
       
-      const catContainer = document.querySelector('.cat-info')
+  const catContainer = document.querySelector('.cat-info');
     //   catContainer.insertAdjacentHTML("beforeend", catCard)
-      
-      catContainer.innerHTML = catCard;
+  catContainer.innerHTML = catCard;
 
 }

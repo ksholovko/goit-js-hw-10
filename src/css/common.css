@@ -12,29 +12,28 @@ body {
   line-height: 1.5;
 }
 
+h1 {
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+p {
+  margin: 0;
+}
+
+p span {
+  font-weight: bold;
+  font-style: italic;
+}
+
 img {
+  padding-top: 15px;
+  padding-bottom: 5px;
   display: block;
   max-width: 50%;
   border-radius: 30px;
 }
 
-.loader {
-  width: 24px;
-  height: 24px;
-  border: 2px solid grey;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
-}
-
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
+.breed-select {
+  display: none;
 }

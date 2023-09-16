@@ -1,21 +1,29 @@
-import axios from "axios";
 import SlimSelect from 'slim-select';
 import "slim-select/dist/slimselect.css";
+import { Report } from 'notiflix/build/notiflix-report-aio';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { fetchBreeds, fetchCatByBreed } from "./cat-api.js";
 
-axios.defaults.headers.common["x-api-key"] = "live_x8AT8B0DXvrKQTrZAhs4XUzdPoRV3uBrBDhhYxuKtXoz7ZQJHVateow5oNSF18wc";
-axios.defaults.baseURL = 'https://api.thecatapi.com/v1';
+const selectElement = document.querySelector('.breed-select'); 
+selectElement.addEventListener('change', showBreedInfo);
 
-const axios = require('axios');
+Loading.standard('Loading...');
 
-const refs = {
-    breedSelector: document.querySelector('.breed-select'),
-};
+fetchBreeds().then( response => createBreedSelector(response))
+  .catch(error => {
+  Loading.remove();
+  Report.failure(
+    'Oops!',
+    'Something went wrong! Try reloading the page!',
+    'Okay',
+  );
+console.log(error);})
+ 
 
-
-axios.get('/breeds')
-  .then(function (response) {
-
-      const storedBreeds = response.data;
+function createBreedSelector(response) {
+      
+  Loading.remove();
+  const storedBreeds = response.data;
    
       for (let i = 0; i < storedBreeds.length; i++) {
           const breed = storedBreeds[i];
@@ -28,37 +36,37 @@ axios.get('/breeds')
   new SlimSelect({
       select: '#placeholder',
       settings: {
-    placeholderText: 'Choose the Breed',
-  }
-})
-    console.log(response);
+        placeholderText: 'Choose the Breed',
+    }
   })
-  .catch(function (error) {
-   
-    console.log(error);
-  })
-  .finally(function () {
-  
-  });
-  
-const selectElement = document.querySelector('.breed-select'); 
+}
 
-selectElement.addEventListener('change', function() {
-  const selectedOption = this.options[this.selectedIndex]; 
-    console.log(selectedOption); 
-    
-axios.get(`/images/search?breed_ids=${selectedOption.value}`)
-  .then(function (response) {
-      let selectedBreed = response.data[0];
+function showBreedInfo() {
 
+  Loading.standard('Loading...');
+  const selectedOption = this.options[this.selectedIndex];
+  const breedId = selectedOption.value;
+  
+  fetchCatByBreed(breedId)
+    .then(response => createBreedMarkup(response))
+    .catch(error => {
+      Loading.remove();
+      Report.failure(
+    'Oops!',
+    'Something went wrong! Try reloading the page!',
+    'Okay',
+  );
+console.log(error);})
+
+}
+
+function createBreedMarkup(response) {
+      
+      Loading.remove();
+      const selectedBreed = response.data[0];
       const catImage = response.data[0].url
       const catName = selectedBreed.breeds[0].name;
       const catTemperament = selectedBreed.breeds[0].temperament;
-          
-      console.log(catImage);
-      console.log(catName);
-      console.log(catTemperament);
-
       const catCard = `<img src="${catImage}" alt="${catName}"s>
       <h1>${catName}</h1>
       <p> <span>Temperament:</span> ${catTemperament}</p>`;
@@ -68,17 +76,4 @@ axios.get(`/images/search?breed_ids=${selectedOption.value}`)
       
       catContainer.innerHTML = catCard;
 
-  })
-  .catch(function (error) {
-   
-    console.log(error);
-  })
-  .finally(function () {
-  
-  });
-
-
-});
-
-
-
+}

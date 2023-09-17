@@ -19,7 +19,7 @@ h1 {
 
 p {
   margin: 0;
-  padding-top: 5px;
+  padding-top: 10px;
   width: 50vw;
 }
 
@@ -29,18 +29,19 @@ p span {
 }
 
 img {
-  animation: 1s ease-out 0s 1 slideInLeft;
   padding-top: 15px;
   display: block;
-  max-width: 50%;
+  max-height: 100vh;
+  max-width: 30vw;
   border-radius: 30px;
+  /* animation-name: slideInLeft; */
 }
 
 .breed-select {
   display: none;
 }
 
-@keyframes slideInLeft {
+/* @keyframes slideInLeft {
   0% {
     transform: translateX(-100%);
   }
@@ -48,4 +49,19 @@ img {
   100% {
     transform: translateX(0);
   }
+} */
+
+
+
+.cat-info {
+  display: flex;
+}
+
+
+.cat-description {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding-left: 20px;
+
 }

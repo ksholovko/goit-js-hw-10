@@ -69,9 +69,9 @@ function createBreedMarkup(response) {
   const catTemperament = selectedBreed.breeds[0].temperament;
 
       const catCard = `<img src="${catImage}" alt="${catName}"s>
-      <h1>${catName}</h1>
+      <div class="cat-description"><h1>${catName}</h1>
       <p>${catDescription}</p>
-      <p> <span>Temperament:</span> ${catTemperament}</p>`;
+      <p> <span>Temperament:</span> ${catTemperament}</p></div>`;
       
   const catContainer = document.querySelector('.cat-info');
     //   catContainer.insertAdjacentHTML("beforeend", catCard)
